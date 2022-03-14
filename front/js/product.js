@@ -11,30 +11,30 @@ const getProduct = async () => {                                        // on cr
 
 const showProduct = async () => {            
   await getProduct();                                              // en attente du produit                   
-  var picture = document.querySelector(".item__img")               // nous utilisons le DOM pour recuperer un element dans le html puis pour le donner une nouvelle variable
-  var imageUrl = document.createElement('img')                     // nous utilisons le DOM pour recuperer un element dans le html puis pour le donner une nouvelle variable
+  let picture = document.querySelector(".item__img")               // nous utilisons le DOM pour recuperer un element dans le html puis pour le donner une nouvelle variable
+  let imageUrl = document.createElement('img')                     // nous utilisons le DOM pour recuperer un element dans le html puis pour le donner une nouvelle variable
   imageUrl.setAttribute('src', product.imageUrl)                   // nous mettons a jour l'attribut src par product.imageUrl
   imageUrl.setAttribute('alt', product.altTxt)                     // nous mettons a jour l'attribut alt par product.altTxt
   picture.appendChild(imageUrl)                                    // nous disons que picture est l'enfant de imageUrl
 
-  var name = document.getElementById('title')                      // nous donnons a title une nouvelle variable 
+  let name = document.getElementById('title')                      // nous donnons a title une nouvelle variable 
   name.innerHTML = product.name;                                   
 
-  var price = document.getElementById('price')                     // nous donnons une nouvelle variable a price (ou pas)
+  let price = document.getElementById('price')                     // nous donnons une nouvelle variable a price (ou pas)
   price.innerHTML = product.price;
 
-  var description = document.getElementById('description')         // nous donnons une nouvelle variable a price (ou pas)
+  let description = document.getElementById('description')         // nous donnons une nouvelle variable a price (ou pas)
   description.innerHTML = product.description;
 
   for (let i = 0; i < product.colors.length; i++) {               // on dit que i = 0 est que product.colors.length doit etre supperieur a 0 on met i++ pour dire qu'il faudra ajouter 1
-  var colors = document.getElementById('colors')                  // nous donnons une nouvelle variable a colors (ou pas)
-  var color = document.createElement('option')                    // nous donnons une nouvelle variable a option
+  let colors = document.getElementById('colors')                  // nous donnons une nouvelle variable a colors (ou pas)
+  let color = document.createElement('option')                    // nous donnons une nouvelle variable a option
   color.innerHTML = product.colors[i]                              
   colors.appendChild(color)                                       
   }
 
   for (let i = 0; i < product.quantity; i++) {                    // on dit que i = 0 est que product.quantity.length doit etre supperieur a 0 on met i++ pour dire qu'il faudra ajouter 1
-    var quantity = document.getElementById('quantity')            // nous donnons une nouvelle variable a quantity (ou pas)
+    let quantity = document.getElementById('quantity')            // nous donnons une nouvelle variable a quantity (ou pas)
     quantity.setAttribute('value', product.quantity[i])
     quantity.innerHTML = product.quantity[i]
     quantity.appendChild(quantity)
@@ -53,7 +53,8 @@ function stockagePanier(panier) {                                      //creatio
 const boutonPanier = document.getElementById('addToCart');             // la je selectionne l'id dans le html
 boutonPanier.addEventListener("click" , function(e) {                  // la quand je clique sur le btn il devra ajouter le produit dans le panier
    optionProduit = {                                                   // on recupere les option choisi par l'utilisateur 
-    id: productId,                                                     // id du produit
+    id: product.name,                                                     // id du produit
+    
     color : color.value,                                               // couleur du produit 
     quantity : quantity.value,                                         // la quantiter du produit
   }

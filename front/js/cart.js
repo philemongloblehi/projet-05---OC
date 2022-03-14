@@ -1,32 +1,64 @@
-panier = JSON.parse(localStorage.getItem("produit"));
+panier = JSON.parse(localStorage.getItem("produit"));                              // on recupere les donner dans le localstorage
 
-let elementPanier = document.querySelector("cart__item");
+let productId = new URL(window.location.href).searchParams.get('id')
 
-if (panier === null) {
-  // si le panier est vide
-  let panierVide;
-  elementPanier.innerHTML = panierVide;
-} else {
-  // sinon
-  // produit a afficher
-  console.log("je suis pas vide");
-  let panierAfficher = [];
+let product;                                                            // on declare une variable product
+const getProduct = async () => {                                        // on cree une constante pour obtenir les produits sur le site
+  await fetch('http://localhost:3000/api/products/')                    // ajout des produits sur le site grace a l'api avec fetch 
+  .then(res => res.json())                                              // reponse
+  .then(JSON => product = JSON)                                          
+  .catch((err) => console.log(err));                                    // pour afficher les erreurs si il y a des erreurs
+  console.log(product) 
+}
+getProduct();
 
-  for (i = 0; i < panier.length; i++) {
+const elementPanier = document.querySelector("#cart__items");                     // on cree une variable element panier 
+
+if (panier === null) {                                                             // si le panier est vide                             
+  let panierVide;                                                                  // on declare une nouvelle variable
+  elementPanier.innerHTML = panierVide;                                           // on definit element panier = parent de panier vide
+} else {                                                                          // sinon
+   let panierAfficher = [];                                                      // on cree un tableau vide pour la page panier
+   for (i = 0; i < panier.length; i++) {                                         // on cree une boucle qui sera repeter pour chaque nouveau element
     panierAfficher =
       panierAfficher +
       `
-    <article class="cart__item" data-id="{product-ID}" data-color="{product-color}">
+                <div class="cart__item__img">
+                  <img src="" alt="">
+                </div>
                 <div class="cart__item__content">
                   <div class="cart__item__content__description">
-                    <h2>${panier[i].name}</h2>
-                    <p>${panier[i].quantity}</p>
+                    <h2>${panier[i].id}</h2>
+                    <p>${panier[i].color}</p>
                     <p>${panier[i].price}€</p>
                   </div>
+                  <div class="cart__item__content__settings">
+                    <div class="cart__item__content__settings__quantity">
+                      <p>Qté :</p>
+                      <input type="number" class="itemQuantity" name="itemQuantity" min="1" max="100" value="${panier[i].quantity}">
+                      </div>
+                      <div class="cart__item__content__settings__delete">
+                        <p class="deleteItem">Supprimer</p>
+                      </div>
+                    </div>
+                  </div>
+                </article> -->
     `;
   }
-  if (i === panier.length);
+  if (i === panier.length)
   {
-    elementPanier.innerHTML = panierAfficher;
+    elementPanier.innerHTML = panierAfficher
   }
 }
+
+// modifier quantiter
+let itemQuantity = document.querySelector(itemQuantity);
+
+
+// pour supprimer
+// let supprimer = document.querySelector(deleteItem);   // nous creeons la variable
+// for (o = 0; 0 < supprimer.length; o++){               // nous creeons une boucle
+// supprimer.addEventListener("click" , (event) =>{      // nous ajoutons un addeventlistener
+
+//  }
+// }
