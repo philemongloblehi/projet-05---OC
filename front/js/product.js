@@ -53,8 +53,10 @@ function stockagePanier(panier) {                                      //creatio
 const boutonPanier = document.getElementById('addToCart');             // la je selectionne l'id dans le html
 boutonPanier.addEventListener("click" , function(e) {                  // la quand je clique sur le btn il devra ajouter le produit dans le panier
    optionProduit = {                                                   // on recupere les option choisi par l'utilisateur 
-    id: product.name,                                                     // id du produit
-    
+    id: productId,                                                     // id du produit
+    name : product.name,
+    price : product.price,
+    imageUrl : product.imageUrl,
     color : color.value,                                               // couleur du produit 
     quantity : quantity.value,                                         // la quantiter du produit
   }
