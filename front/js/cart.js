@@ -1,5 +1,5 @@
-panier = JSON.parse(localStorage.getItem("produit"));
-let productId = new URL(window.location.href).searchParams.get('id')                              // on recupere les donner dans le localstorage
+let productId = new URL(window.location.href).searchParams.get('id')
+panier = JSON.parse(localStorage.getItem("produit"));                     // on recupere les donner dans le localstorage
   let product;                                                            // on declare une variable product
 const getProduct = async () => {                                        // on cree une constante pour obtenir les produits sur le site
   await fetch('http://localhost:3000/api/products/')                    // ajout des produits sur le site grace a l'api avec fetch 
@@ -10,26 +10,22 @@ const getProduct = async () => {                                        // on cr
 }
 
 getProduct();
-const showProduct = async () => {            
-  await getProduct();                                              // en attente du produit                   
+const showProduct =  () => {            
+   getProduct();                                              // en attente du produit                   
   let picture = document.querySelector("cart__item__img")               // nous utilisons le DOM pour recuperer un element dans le html puis pour le donner une nouvelle variable
   picture.setAttribute('src', product.imageUrl)                   // nous mettons a jour l'attribut src par product.imageUrl
   pictureAlt.setAttribute('alt', product.altTxt)                     // nous mettons a jour l'attribut alt par product.altTxt
   picture.appendChild(imageUrl)                                    // nous disons que picture est l'enfant de imageUrl
 
-  let name = document.getElementById('title')                      // nous donnons a title une nouvelle variable 
+  let name = document.getElementById('cart__item__content__description')                      // nous donnons a title une nouvelle variable 
   name.innerHTML = product.name;                                   
 
   let price = document.getElementById('cart__item__content')                     // nous donnons une nouvelle variable a price (ou pas)
   price.innerHTML = product.price;
-}
-
- 
-
-
+  
+} 
 
 const elementPanier = document.querySelector("#cart__items");                     // on cree une variable element panier 
-
 if (panier === null) {                                                             // si le panier est vide                             
   let panierVide;                                                                  // on declare une nouvelle variable
   elementPanier.innerHTML = panierVide;                                           // on definit element panier = parent de panier vide
@@ -39,7 +35,7 @@ if (panier === null) {                                                          
     panierAfficher =
       panierAfficher +
       `
-      
+      <article class="cart__item" data-id="{product-ID}" data-color="{product-color}">
       <div class="cart__item__img">
         <img src="${panier[i].imageUrl}" alt="Photographie d'un canapé">
       </div>
@@ -59,7 +55,7 @@ if (panier === null) {                                                          
           </div>
         </div>
       </div>
-    </article> -->
+    </article>
     `;
   }
   if (i === panier.length)
@@ -70,13 +66,5 @@ if (panier === null) {                                                          
 
 
 // modifier quantiter
-let itemQuantity = document.querySelector(itemQuantity);
+let itemQuantity = document.querySelector("itemQuantity");
 
-
-// pour supprimer
-// let supprimer = document.querySelector(deleteItem);   // nous creeons la variable
-// for (o = 0; 0 < supprimer.length; o++){               // nous creeons une boucle
-// supprimer.addEventListener("click" , (event) =>{      // nous ajoutons un addeventlistener
-
-//  }
-// }

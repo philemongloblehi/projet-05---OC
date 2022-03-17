@@ -42,7 +42,7 @@ const showProduct = async () => {
 
 }
 let panier;                                                            // je cree la variable panier
-let optionProduit;                                                     // je cree la variable option produit
+let optionProduit;                                                    // je cree la variable option produit
 let color = document.getElementById('colors');
 
 function stockagePanier(panier) {                                      //creation de la clé avec les info 
@@ -54,12 +54,10 @@ const boutonPanier = document.getElementById('addToCart');             // la je 
 boutonPanier.addEventListener("click" , function(e) {                  // la quand je clique sur le btn il devra ajouter le produit dans le panier
    optionProduit = {                                                   // on recupere les option choisi par l'utilisateur 
     id: productId,                                                     // id du produit
-    name : product.name,
-    price : product.price,
-    imageUrl : product.imageUrl,
     color : color.value,                                               // couleur du produit 
     quantity : quantity.value,                                         // la quantiter du produit
   }
+  
   panier = JSON.parse(localStorage.getItem("produit"));                             
   if (panier){                                                         // si panier = true ( vrai ) donc le panier existe vraiment
     panier.push(optionProduit);                                        // on pushera les nouvelles info dans le localstorage                               
